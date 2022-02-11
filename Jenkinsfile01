@@ -12,9 +12,17 @@ pipeline {
     stage('Build') {
       steps {
         bat "dotnet restore 01_VisualStudio\\WinForms.App\\WinForms.App\\WinForms.App.csproj"
+
         bat "\"${MSBUILD}\" 01_VisualStudio\\WinForms.App\\WinForms.app.sln /p:Configuration=${env.CONFIG} /p:AppxBundlePlatforms=${env.PLATFORM}  /p:AppxBundle=Never /p:UapAppxPackageBuildMode=Sideloading  /p:AppxPackageSigningEnabled=false"
         
       }
+      post{
+          always {
+           archiveArtifacts artifacts: '**/*.msix', followSymlinks: false
+          }
+        }
+      }
     }
+    
   }
 }
