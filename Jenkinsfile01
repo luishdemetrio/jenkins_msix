@@ -3,14 +3,15 @@ pipeline {
   agent any
 
   environment {
+    MSBUILD = "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Msbuild\\Current\\Bin\\MSBuild.exe"
     CONFIG = 'Release'
     PLATFORM = 'x86'
   }
-
+  
   stages {
     stage('Build') {
       steps {
-        bat "msbuild.exe /p:Configuration=${env.CONFIG}; /p:AppxBundlePlatforms=${env.PLATFORM}  /p:AppxBundle=Never /p:UapAppxPackageBuildMode=Sideloading  /p:AppxPackageSigningEnabled=false"
+        bat "\"${MSBUILD}\" /p:Configuration=${env.CONFIG}; /p:AppxBundlePlatforms=${env.PLATFORM}  /p:AppxBundle=Never /p:UapAppxPackageBuildMode=Sideloading  /p:AppxPackageSigningEnabled=false"
         
       }
     }
