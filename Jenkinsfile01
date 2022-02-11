@@ -20,9 +20,7 @@ pipeline {
           always {
            archiveArtifacts artifacts: '**/*.msix', followSymlinks: false
           }
-        }
       }
     }
-    
   }
 }
