@@ -6,7 +6,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        bat "\"${MSBUILD}\" /p:Configuration=${env.CONFIG}; /p:AppxBundlePlatforms=${env.PLATFORM}  /p:AppxBundle=Never /p:UapAppxPackageBuildMode=Sideloading  /p:AppxPackageSigningEnabled=false
+        bat "\"${MSBUILD}\" /p:Configuration=${env.CONFIG}; /p:AppxBundlePlatforms=${env.PLATFORM}  /p:AppxBundle=Never /p:UapAppxPackageBuildMode=Sideloading  /p:AppxPackageSigningEnabled=false"
         
       }
     }
