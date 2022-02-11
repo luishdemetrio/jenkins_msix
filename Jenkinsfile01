@@ -1,8 +1,12 @@
 pipeline {
+  
+  agent any
+
   environment {
     CONFIG = 'Release'
     PLATFORM = 'x86'
   }
+  
   stages {
     stage('Build') {
       steps {
