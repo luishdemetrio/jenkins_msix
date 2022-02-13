@@ -9,6 +9,19 @@ pipeline {
   }
   
   stages {
+
+    stage('Update manifest version') {
+      steps {
+          powershell '''
+            $manifest = "01_VisualStudio\\WinForms.App\\WinForms.Packaging\\Package.appxmanifest"     
+            [xml]$xmlDoc = Get-Content $manifest
+            $version = $xmlDoc.Package.Identity.Version
+            $trimmedVersion = $version -replace '.[0-9]+$', '.'
+            $xmlDoc.Package.Identity.Version = $trimmedVersion + ${env:BUILD_NUMBER}
+            $xmlDoc.Save($xmlFileName)
+          '''
+      }
+  }
     stage('Build') {
       steps {
         bat "dotnet restore 01_VisualStudio\\WinForms.App\\WinForms.App\\WinForms.App.csproj"
