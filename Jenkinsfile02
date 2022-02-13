@@ -1,0 +1,37 @@
+pipeline {
+  
+  agent any
+
+tools {
+  maven 'maven-3.6.3'
+}
+  environment {
+    MSBUILD = "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Msbuild\\Current\\Bin\\MSBuild.exe"
+    CONFIG = 'Release'
+    PLATFORM = 'x86'
+
+   
+  }
+  
+  stages {
+    stage('Build Java GUI'){
+      steps{
+        bat "mvn clean package"
+
+
+      }
+    }
+    stage('Build MSIX package') {
+      steps {
+        
+        bat "\"${MSBUILD}\" 02_WAP\\MyJavaApp.Packaging\\MyJavaApp.Packaging.sln /p:Configuration=${env.CONFIG} /p:AppxBundlePlatforms=${env.PLATFORM}  /p:AppxBundle=Never /p:UapAppxPackageBuildMode=Sideloading  /p:AppxPackageSigningEnabled=false"
+        
+      }
+      post{
+          always {
+           archiveArtifacts artifacts: '**/*.msix', followSymlinks: false
+          }
+      }
+    }
+  }
+}
