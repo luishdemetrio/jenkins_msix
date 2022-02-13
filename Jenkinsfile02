@@ -27,7 +27,7 @@ pipeline {
         stage('Build') {
             steps {
                 dir("%localappdata%\\Jenkins\\.jenkins\\workspace\\Java GUI WAP MSIX\\02_WAP\\demo") {
-                sh 'mvn clean package'
+                bat 'mvn clean package'
                 }
             }
         }
