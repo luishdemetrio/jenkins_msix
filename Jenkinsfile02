@@ -30,6 +30,16 @@ pipeline {
                 bat 'mvn clean package'
                 }
             }
+            post{
+              always {
+                fileOperations([fileCopyOperation(
+                  excludes: '',
+                  flattenFiles: false,
+                  includes: '\\02_WAP\\demo\\target\\myapp.exe',
+                  targetLocation: "02_WAP\\MyJavaApp.Packaging\\MyJavaApp.Packaging\\myapp.exe"
+                )]).
+              }
+            }
         }
 
     stage('Build MSIX package') {
