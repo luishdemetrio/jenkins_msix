@@ -3,7 +3,7 @@ pipeline {
   agent any
 
   tools {
-        maven "MAVEN 3.8"
+        maven "Maven 3.8"
         jdk "JDK 11"
   }
 
@@ -29,7 +29,7 @@ pipeline {
                 }
             }
         }
-        
+
     stage('Build MSIX package') {
       steps {
         
