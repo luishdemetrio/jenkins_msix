@@ -44,6 +44,7 @@ pipeline {
         steps {
                   bat '''
                     "C:\\Program Files (x86)\\VB6VirtualRegistry\\Vb6VirtualRegistry.exe" pack "C:\\Users\\luisdem\\AppData\\Local\\Jenkins\\.jenkins\\workspace\\Manual MSIX Packaging\\03_VB6RegistryTool\\msix_files" "C:\\Users\\luisdem\\AppData\\Local\\Jenkins\\.jenkins\\workspace\\Manual MSIX Packaging\\03_VB6RegistryTool\\myjava_${env:BUILD_NUMBER}.msix"
+                    '''
             }
             post{
                   always {
