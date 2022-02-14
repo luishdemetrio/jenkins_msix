@@ -1,0 +1,53 @@
+pipeline {
+  
+  agent any
+
+  tools {
+        maven "Maven 3.8"
+        jdk "JDK 11"
+  }
+
+  environment {
+    MSBUILD = "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Msbuild\\Current\\Bin\\MSBuild.exe"
+    CONFIG = 'Release'
+    PLATFORM = 'x86'
+
+   
+  }
+  
+  stages {
+      stage('Initialize'){
+            steps{
+              
+              echo "PATH = ${M2_HOME}\\bin:${PATH}"
+              echo "M2_HOME = C:\\Program Files (x86)\\apache-maven"
+                
+            }
+        }
+        stage('Build') {
+            steps {
+                dir("\\02_WAP\\demo") {
+                bat 'mvn clean package'
+                }
+            }
+            post{
+              always {
+                bat 'copy 02_WAP\\demo\\target\\myapp.exe 02_WAP\\MyJavaApp.Packaging\\MyJavaApp.Packaging\\MyApp /y'
+              }
+            }
+        }
+
+    stage('Build MSIX package') {
+      steps {
+        
+        bat "\"${MSBUILD}\" 02_WAP\\MyJavaApp.Packaging\\MyJavaApp.Packaging.sln /p:Configuration=${env.CONFIG} /p:AppxBundlePlatforms=${env.PLATFORM}  /p:AppxBundle=Never /p:UapAppxPackageBuildMode=Sideloading  /p:AppxPackageSigningEnabled=false"
+        
+      }
+      post{
+          always {
+           archiveArtifacts artifacts: '**/*.msix', followSymlinks: false
+          }
+      }
+    }
+  }
+}
