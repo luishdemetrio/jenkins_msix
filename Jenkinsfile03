@@ -24,7 +24,7 @@ pipeline {
             }
             post{
               always {
-                bat 'copy 03_VB6RegistryTool\\demo\\target\\myapp.exe 03_VB6RegistryTool\\msix_files\\VFS\ProgramFilesX86\MyApp /y'
+                bat 'copy 03_VB6RegistryTool\\demo\\target\\myapp.exe 03_VB6RegistryTool\\msix_files\\VFS\\ProgramFilesX86\\MyApp /y'
               }
             }
         }
