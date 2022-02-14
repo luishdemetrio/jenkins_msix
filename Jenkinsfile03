@@ -31,7 +31,7 @@ pipeline {
       stage('Update manifest version') {
             steps {
                   powershell '''
-                    $manifest = "03_VB6RegistryTool\\msix_files\\appmanifest.xml"     
+                    $manifest = "03_VB6RegistryTool\\msix_files\\appxmanifest.xml"     
                     [xml]$xmlDoc = Get-Content $manifest
                     $version = $xmlDoc.Package.Identity.Version
                     $trimmedVersion = $version -replace '.[0-9]+$', '.'
