@@ -8,10 +8,10 @@ This repo is used by a series of posts to demonstrate how packaging Desktop appl
 
 > Parts:
 > 
-> 1. **Setup the Jenkins environment**: install Jenkins and the required tools.
-> 2. **Packaging a Visual Studio solution:** for applications that use Visual Studio IDE, like Windows Forms and WPF.
-> 3. **Packaging a solution developed outside Visual Studio:** for applications developed outside VS, i.e., in others IDEs like Eclipse or **Visual Studio Code**, for **Java GUI** application.
-> 4. **Packaging using the [VB6RegistryTool](https://github.com/luishdemetrio/Vb6VirtualRegistry):** despite of the name, the tool can be used by any technology.
+> 1. **[Setup the Jenkins environment](https://techcommunity.microsoft.com/t5/windows-dev-appconsult/create-a-jenkins-pipeline-to-deploy-desktop-apps-as-msix-part-1/ba-p/3160398)**: install Jenkins and the required tools.
+> 2. **[Packaging a Visual Studio solution](https://techcommunity.microsoft.com/t5/windows-dev-appconsult/create-a-jenkins-pipeline-to-deploy-desktop-apps-as-msix-part-1/ba-p/3160398):** for applications that use Visual Studio IDE, like Windows Forms and WPF.
+> 3. **[Packaging a solution developed outside Visual Studio](https://techcommunity.microsoft.com/t5/windows-dev-appconsult/create-a-jenkins-pipeline-to-deploy-msix-desktop-apps-part-3/ba-p/3160430):** for applications developed outside VS, i.e., in others IDEs like Eclipse or **Visual Studio Code**, for **Java GUI** application.
+> 4. **[Packaging using the VB6RegistryTool](https://techcommunity.microsoft.com/t5/windows-dev-appconsult/create-a-jenkins-pipeline-to-deploy-desktop-apps-as-msix-part-4/ba-p/3161873):** despite of the name, the tool can be used by any technology.
 
 
 ## Disclaimer
