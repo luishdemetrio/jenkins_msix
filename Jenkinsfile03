@@ -29,24 +29,25 @@ pipeline {
             }
         }
 
-    stage('Build MSIX package') {
 
-      steps {
-          powershell '''
-            $manifest = "03_VB6RegistryTool\\msix_files\\appmanifest.xml"     
-            [xml]$xmlDoc = Get-Content $manifest
-            $version = $xmlDoc.Package.Identity.Version
-            $trimmedVersion = $version -replace '.[0-9]+$', '.'
-            $xmlDoc.Package.Identity.Version = $trimmedVersion + ${env:BUILD_NUMBER}
-            $xmlDoc.Save($manifest)
-          '''
+    stage('Update manifest version') {
+          steps {
+              powershell '''
+                $manifest = "03_VB6RegistryTool\\msix_files\\appmanifest.xml"     
+                [xml]$xmlDoc = Get-Content $manifest
+                $version = $xmlDoc.Package.Identity.Version
+                $trimmedVersion = $version -replace '.[0-9]+$', '.'
+                $xmlDoc.Package.Identity.Version = $trimmedVersion + ${env:BUILD_NUMBER}
+                $xmlDoc.Save($manifest)
+              '''
+        }
+    }
+    stage('Build MSIX package') {
 
             bat "C:\\Program files (x86)\\VB6RegistryTool\\vb6registrytool.exe 03_VB6RegistryTool\\msix_files 03_VB6RegistryTool\\myjava_${env:BUILD_NUMBER}.msix"
 
       }
 
-
-      
       post{
           always {
            archiveArtifacts artifacts: '**/*.msix', followSymlinks: false
