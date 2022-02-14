@@ -21,7 +21,7 @@ pipeline {
             $xmlDoc.Save($manifest)
           '''
       }
-  }
+    }
     stage('Build') {
       steps {
         bat "dotnet restore 01_VisualStudio\\WinForms.App\\WinForms.App\\WinForms.App.csproj"

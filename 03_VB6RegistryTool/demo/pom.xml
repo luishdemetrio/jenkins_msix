@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.example</groupId>
+  <artifactId>demo</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <name>demo</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+ <build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.0</version>
+             <configuration>
+                <release>11</release>
+                <fork>true</fork>
+                <executable>C:\Program Files\Eclipse Adoptium\jdk-11.0.14.9-hotspot\bin\javac</executable>
+            </configuration>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-shade-plugin</artifactId>
+            <version>1.7.1</version>
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>shade</goal>
+                    </goals>
+                </execution>
+            </executions>
+            <configuration>
+                <shadedArtifactAttached>true</shadedArtifactAttached>
+                <shadedClassifierName>shaded</shadedClassifierName>
+                <transformers>
+                    <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                        <mainClass>com.example.App</mainClass>
+                    </transformer>
+                </transformers>
+            </configuration>
+        </plugin>
+        <plugin>
+            <groupId>com.akathist.maven.plugins.launch4j</groupId>
+            <artifactId>launch4j-maven-plugin</artifactId>
+            <version>1.7.25</version>
+            <executions>
+                <execution>
+                    <id>l4j-clui</id>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>launch4j</goal>
+                    </goals>
+                    <configuration>
+                        <headerType>gui</headerType>
+                        <jar>${project.build.directory}/${artifactId}-${version}-shaded.jar</jar>
+                        <outfile>${project.build.directory}/myapp.exe</outfile>
+                        <downloadUrl>http://java.com/download</downloadUrl>
+                        <classPath>
+                            <mainClass>com.example.App</mainClass>
+                            <preCp>anything</preCp>
+                        </classPath>
+                        
+                        <jre>
+                            <minVersion>11.0.1</minVersion>
+                            
+                        </jre>
+                        <versionInfo>
+                            <fileVersion>1.0.0.0</fileVersion>
+                            <txtFileVersion>${project.version}</txtFileVersion>
+                            <fileDescription>${project.name}</fileDescription>
+                            <copyright>2022 replaceme.com</copyright>
+                            <productVersion>1.0.0.0</productVersion>
+                            <txtProductVersion>1.0.0.0</txtProductVersion>
+                            <productName>${project.name}</productName>
+                            <companyName>replaceme.com</companyName>
+                            <internalName>myapp</internalName>
+                            <originalFilename>myapp.exe</originalFilename>
+                        </versionInfo>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+</project>
