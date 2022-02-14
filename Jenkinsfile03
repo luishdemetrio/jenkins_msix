@@ -42,7 +42,7 @@ pipeline {
       }
       stage('Build MSIX package') {
         steps {
-                  bat "C:\\Program files (x86)\\VB6RegistryTool\\vb6registrytool.exe 03_VB6RegistryTool\\msix_files 03_VB6RegistryTool\\myjava_${env:BUILD_NUMBER}.msix"
+                  bat "vb6registrytool.exe 03_VB6RegistryTool\\msix_files 03_VB6RegistryTool\\myjava_${env:BUILD_NUMBER}.msix"
             }
             post{
                   always {
